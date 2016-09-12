@@ -1,0 +1,32 @@
+body {
+  font-family: roboto;
+  color: white;
+  background: black;
+}
+body a {
+  color: hotpink;
+}
+body #header {
+  text-align: center;
+  font-size: 400%;
+}
+body hr {
+  border: 1px solid red;
+  width: 90%;
+}
+
+textarea, .mark {
+  resize: vertical;
+  width: 40%;
+  height: 550px;
+  float: left;
+  font-size: 17px;
+  margin-left: 50px;
+  margin-top: 20px;
+}
+
+.mark {
+  margin-left: 30px;
+  margin-top: 0px;
+  margin-bottom: 100px;
+}

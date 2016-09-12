@@ -1,0 +1,58 @@
+
+
+//textbox where user can write input
+var TextBox = React.createClass({
+  //set initial state of value
+  getInitialState: function() {
+    return {
+      value: 'Heading\n=======\n\nSub-heading\n-----------\n \n### Another deeper heading\n \nParagraphs are separated\nby a blank line.\n\nLeave 2 spaces at the end of a line to do a  \nline break\n\nText attributes *italic*, **bold**, \n`monospace`, ~~strikethrough~~ .\n\nShopping list:\n\n  * apples\n  * oranges\n  * pears\n\nNumbered list:\n\n  1. apples\n  2. oranges\n  3. pears\n\nThe rain---not the reign---in\nSpain.\n\n *[Developed by Malek](http://malekdev.com)*   - Powered by React'
+    }
+  },
+
+  //update value
+  updateVal: function(newVal) {
+    this.setState({
+      value: newVal
+    });
+  },
+
+  //update text
+  updateText: function() {
+    //getting user text typed in from refs
+    var newVal = this.refs.inputVal.value;
+    //updating the value
+    this.updateVal(newVal)
+  },
+
+  //value that gets stored for what user types
+  render: function() {
+    return (
+      <div className="text">
+        <textarea type="text" ref="inputVal" value={this.state.value} onChange={this.updateText}/>
+        <MarkBox textVal={this.state.value} />
+      </div>
+    );
+  }
+});
+
+//markdown box that outputs marked text as user types
+var MarkBox = React.createClass({
+  //function that takes value of inputted text and marks it down
+  markUp: function(textVal) {
+    var markUp = marked(textVal, {sanitize: true});
+    return { __html: markUp };
+  },
+
+  render: function() {
+    return (
+      <div className="mark">
+      <span dangerouslySetInnerHTML={this.markUp(this.props.textVal)} />
+      </div>
+    );
+  }
+});
+
+ReactDOM.render(
+  <TextBox />,
+  document.getElementById('app')
+)
